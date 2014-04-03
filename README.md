@@ -44,6 +44,7 @@ The project will be built locally by default.
 
 To run on a remote server, remove `--connection=local` from the CLI and change the `production` inventory file to specify the destination server.
 
+
 ## Examples
 
 ### Project
@@ -95,3 +96,16 @@ To run on a remote server, remove `--connection=local` from the CLI and change t
     - hosts: web
         roles:
         - { role: web }
+
+
+
+
+## CHANGELOG
+
+### Version 0.0.1 – April 22, 2014
+
+  - Initial release.
+
+## License
+
+MIT: http://davestern.mit-license.org

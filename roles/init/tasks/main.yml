@@ -8,7 +8,7 @@
     - host_vars
 
 - name: Create directory structure for roles
-  file: path={{ project_dir }}/{{ item[0] }}/{{ item[1] }} state=directory
+  file: path={{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }} state=directory
   with_nested:
     - roles
     - [ 'files', 'handlers', 'meta', 'tasks', 'templates', 'vars' ]
@@ -16,7 +16,7 @@
     - roles
 
 - name: Create main.yml in directory structure for roles
-  template: src={{ item[1] }}.j2 dest={{ project_dir }}/{{ item[0] }}/{{ item[1] }}/main.yml
+  template: src={{ item[1] }}.j2 dest={{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}/main.yml
   with_nested:
     - roles
     - [ 'handlers', 'tasks' ]

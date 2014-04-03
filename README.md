@@ -49,30 +49,31 @@ To run on a remote server, remove `--connection=local` from the CLI and change t
 ### Project
 
     /tmp/ansible-project/
-    ├── database
-    │   ├── files
-    │   ├── handlers
-    │   │   └── main.yml
-    │   ├── meta
-    │   ├── tasks
-    │   │   └── main.yml
-    │   ├── templates
-    │   └── vars
     ├── database.yml
     ├── group_vars
     ├── host_vars
     ├── master.yml
     ├── production
+    ├── roles
+    │   ├── database
+    │   │   ├── files
+    │   │   ├── handlers
+    │   │   │   └── main.yml
+    │   │   ├── meta
+    │   │   ├── tasks
+    │   │   │   └── main.yml
+    │   │   ├── templates
+    │   │   └── vars
+    │   └── web
+    │       ├── files
+    │       ├── handlers
+    │       │   └── main.yml
+    │       ├── meta
+    │       ├── tasks
+    │       │   └── main.yml
+    │       ├── templates
+    │       └── vars
     ├── staging
-    ├── web
-    │   ├── files
-    │   ├── handlers
-    │   │   └── main.yml
-    │   ├── meta
-    │   ├── tasks
-    │   │   └── main.yml
-    │   ├── templates
-    │   └── vars
     └── web.yml
 
 ### Files

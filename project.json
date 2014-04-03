@@ -1,0 +1,7 @@
+{
+    "roles": [
+        "web",
+        "database"
+    ],
+    "project_dir": "/tmp/ansible-project"
+}

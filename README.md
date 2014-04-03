@@ -120,7 +120,7 @@ To run on a remote server, remove `--connection=local` from the CLI and change t
 
 ## CHANGELOG
 
-### Version 0.0.1 – April 22, 2014
+### Version 0.0.1 – April 2, 2014
 
   - Initial release.
 

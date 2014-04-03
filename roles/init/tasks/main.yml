@@ -1,0 +1,31 @@
+---
+# init tasks main
+
+# tags
+
+- name: Create directory structure for roles
+  file: path={{ project_dir }}/{{ item[0] }}/{{ item[1] }} state=directory
+  with_nested:
+    - roles
+    - [ 'files', 'handlers', 'meta', 'tasks', 'templates', 'vars' ]
+  tags:
+    - roles
+
+- name: Create inventory files
+  template: src=inventory.j2 dest={{ project_dir }}/{{ item }}
+  with_items:
+    - production
+    - staging
+  tags:
+      - inventory
+
+- name: Create role playbooks
+  template: src=role.j2 dest={{ project_dir }}/{{ item }}.yml
+  with_items: roles
+  tags:
+    - roles
+
+- name: Create master playbook
+  template: src=master.j2 dest={{ project_dir }}/master.yml
+  tags:
+    - master

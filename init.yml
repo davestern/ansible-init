@@ -1,0 +1,5 @@
+---
+# ansible-init
+- hosts: all
+  roles:
+    - { role: init }

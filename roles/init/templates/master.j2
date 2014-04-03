@@ -1,0 +1,5 @@
+---
+
+{% for role in roles %}
+- include: { include: {{ role }}.yml }
+{% endfor %}

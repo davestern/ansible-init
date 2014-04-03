@@ -43,3 +43,54 @@ Default project JSON file:
 The project will be built locally by default.
 
 To run on a remote server, remove `--connection=local` from the CLI and change the `production` inventory file to specify the destination server.
+
+## Examples
+
+### Project
+
+    /tmp/ansible-project/
+    ├── database
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── templates
+    │   └── vars
+    ├── database.yml
+    ├── group_vars
+    ├── host_vars
+    ├── master.yml
+    ├── production
+    ├── staging
+    ├── web
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── templates
+    │   └── vars
+    └── web.yml
+
+### Files
+
+#### master.yml
+
+    ---
+    # master playbook
+
+    - include: { include: web.yml }
+    - include: { include: database.yml }
+
+
+#### web.yml
+
+    ---
+    # web role
+
+    - hosts: web
+        roles:
+        - { role: web }

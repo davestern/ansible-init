@@ -84,8 +84,8 @@ To run on a remote server, remove `--connection=local` from the CLI and change t
     ---
     # master playbook
 
-    - include: { include: web.yml }
-    - include: { include: database.yml }
+    - include: web.yml
+    - include: database.yml
 
 
 #### web.yml
@@ -94,7 +94,7 @@ To run on a remote server, remove `--connection=local` from the CLI and change t
     # web role
 
     - hosts: web
-        roles:
+      roles:
         - { role: web }
 
 #### roles/web/tasks/main.yml

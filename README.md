@@ -97,7 +97,25 @@ To run on a remote server, remove `--connection=local` from the CLI and change t
         roles:
         - { role: web }
 
+#### roles/web/tasks/main.yml
 
+    ---
+    # Tasks for web
+
+    #- name: example
+    #  action: example
+    #  notify:
+    #    - restart service
+    #  tags:
+    #    - example
+
+#### roles/web/handlers/main.yml
+
+    ---
+    # Handlers for web
+
+    #- name: example restart
+    #  action: service name=service state=restarted
 
 
 ## CHANGELOG

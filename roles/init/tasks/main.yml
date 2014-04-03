@@ -1,13 +1,25 @@
 ---
 # init tasks main
 
-# tags
+- name: Create general directories
+  file: path={{ project_dir }}/{{ item }} state=directory
+  with_items:
+    - group_vars
+    - host_vars
 
 - name: Create directory structure for roles
   file: path={{ project_dir }}/{{ item[0] }}/{{ item[1] }} state=directory
   with_nested:
     - roles
     - [ 'files', 'handlers', 'meta', 'tasks', 'templates', 'vars' ]
+  tags:
+    - roles
+
+- name: Create main.yml in directory structure for roles
+  template: src={{ item[1] }}.j2 dest={{ project_dir }}/{{ item[0] }}/{{ item[1] }}/main.yml
+  with_nested:
+    - roles
+    - [ 'handlers', 'tasks' ]
   tags:
     - roles
 

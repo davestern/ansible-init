@@ -1,37 +1,45 @@
 ansible-init
 =========================
 
-an ansible playbook for creating ansible playbooks.
+Ansible playbook for creating ansible playbooks.
 
-Ansible playbook to set up one common ansible project structure.
+The playbook sets up the common ansible project structure described in the [ansible best practices](http://docs.ansible.com/playbooks_best_practices.html).
 
-See:
-http://docs.ansible.com/playbooks_best_practices.html
-and
-http://docs.ansible.com/playbooks_roles.html
 
-Usage:
+## Usage:
 
-The project will be build locally by default.
+Use either of the methods below to set up a local directory and file structure ready for `ansible-playbook` use. All that's needed is to modify the inventory, then add tasks, handlers, files and templates.
 
-    ansible-playbook -i production init.yml --connection=local --extra-vars '{"roles": ["web", "database", "etc"], "project_dir": "/home/user/ansible/project"}'
+    ansible-playbook \
+    init.yml \
+    -i production \
+    --connection=local \
+    --extra-vars='{"roles": ["web", "database"], "project_dir": "/tmp/ansible-project"}'
 
-OR using a JSON file with variables:
+or using a JSON file with variables:
 
-    ansible-playbook -i production init.yml --connection=local --extra-vars "@inifile.json"
+    ansible-playbook \
+    init.yml \
+    -i production \
+    --connection=local \
+    --extra-vars='@project.json'
 
-JSON file:
+Default project JSON file:
 
     {
         "roles": [
             "web",
-            "database",
-            "etc"
+            "database"
         ],
-        "project_dir": "/home/user/ansible/project"
+        "project_dir": "/tmp/ansible-project"
     }
 
-roles: all the roles that should be created
-project_dir: the location to create ansible project
+**roles:** array of roles that should be created
 
-To run on a remote server, remove `--connection=local` from the CLI and change the `production` inventory file.
+**project_dir:** the directory in which to create the ansible project
+
+## Notes
+
+The project will be built locally by default.
+
+To run on a remote server, remove `--connection=local` from the CLI and change the `production` inventory file to specify the destination server.

@@ -8,6 +8,7 @@
   with_items:
     - group_vars
     - host_vars
+    - library
 
 - name: "Create directory structure for roles"
   file:
@@ -15,7 +16,7 @@
     state: directory
   with_nested:
     - roles
-    - [ 'files', 'handlers', 'meta', 'tasks', 'templates', 'vars' ]
+    - [ 'defaults', 'files', 'handlers', 'meta', 'tasks', 'templates', 'vars' ]
   tags:
     - roles
 

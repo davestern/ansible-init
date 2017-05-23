@@ -30,6 +30,15 @@
   tags:
     - roles
 
+- name: "Create group_vars/all"
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ project_dir }}/group_vars/{{ item }}"
+  with_items:
+    - all
+  tags:
+    - group_vars
+
 - name: "Create inventory files"
   template:
     src: inventory.j2

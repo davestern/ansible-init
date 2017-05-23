@@ -44,6 +44,7 @@ The project will be built locally by default.
 
 To run on a remote server, remove `--connection=local` from the CLI and change the `production` inventory file to specify the destination server.
 
+In the [ansible best practices](http://docs.ansible.com/playbooks_best_practices.html) the inventory file is called `production`. I chose to follow this convention for the inventory of **ansible-init** itself. If you prefer a different name for the **ansible-init** inventory (like `inventory`), just change the name of the file and run the `ansible-playbook` with `-i inventory` instead. If you prefer different inventory files for your generated project, update the list in the `"Create inventory files"` task in [roles/init/tasks/main.yml](roles/init/tasks/main.yml)
 
 ## Examples
 

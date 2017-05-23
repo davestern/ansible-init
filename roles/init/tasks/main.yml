@@ -15,7 +15,7 @@
     path: "{{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}"
     state: directory
   with_nested:
-    - roles
+    - "{{ roles }}"
     - [ 'defaults', 'files', 'handlers', 'meta', 'tasks', 'templates', 'vars' ]
   tags:
     - roles
@@ -25,7 +25,7 @@
       src: "{{ item[1] }}.j2"
       dest: "{{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}/main.yml"
   with_nested:
-    - roles
+    - "{{ roles }}"
     - [ 'handlers', 'tasks' ]
   tags:
     - roles
@@ -53,7 +53,8 @@
   template:
     src: role.j2
     dest: "{{ project_dir }}/{{ item }}.yml"
-  with_items: roles
+  with_items:
+    - "{{ roles }}"
   tags:
     - roles
 

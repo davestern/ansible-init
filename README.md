@@ -46,6 +46,8 @@ To run on a remote server, remove `--connection=local` from the CLI and change t
 
 In the [ansible best practices](http://docs.ansible.com/playbooks_best_practices.html) the inventory file is called `production`. I chose to follow this convention for the inventory of **ansible-init** itself. If you prefer a different name for the **ansible-init** inventory (like `inventory`), just change the name of the file and run the `ansible-playbook` with `-i inventory` instead. If you prefer different inventory files for your generated project, update the list in the `"Create inventory files"` task in [roles/init/tasks/main.yml](roles/init/tasks/main.yml)
 
+`roles` is a reserved word: `[WARNING]: Found variable using reserved name: roles`. This variable name will change in future versions, probably a breaking change.
+
 ## Examples
 
 ### Project
@@ -54,10 +56,12 @@ In the [ansible best practices](http://docs.ansible.com/playbooks_best_practices
     ├── database.yml
     ├── group_vars
     ├── host_vars
+    ├── library
     ├── master.yml
     ├── production
     ├── roles
     │   ├── database
+    │   │   ├── defaults    
     │   │   ├── files
     │   │   ├── handlers
     │   │   │   └── main.yml
@@ -67,6 +71,7 @@ In the [ansible best practices](http://docs.ansible.com/playbooks_best_practices
     │   │   ├── templates
     │   │   └── vars
     │   └── web
+    │       ├── defaults        
     │       ├── files
     │       ├── handlers
     │       │   └── main.yml
@@ -122,8 +127,12 @@ In the [ansible best practices](http://docs.ansible.com/playbooks_best_practices
 ## CHANGELOG
 
 ### Version 0.0.1 – April 2, 2014
-
   - Initial release.
+### Version 0.1.0 – May 23, 2017
+  - Added `library` to main directory and `defaults` to role directories
+  - Added default `group_vars/all` file
+  - Fixed YAML syntax to quote strings and use colon separators for attributes
+  - Fixed unquoted `{{ roles }}` variable in [roles/init/tasks/main.yml](roles/init/tasks/main.yml. This was breaking role creation in newer versions of ansible.
 
 ## License
 

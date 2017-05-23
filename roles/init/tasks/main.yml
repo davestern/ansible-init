@@ -1,43 +1,55 @@
 ---
 # init tasks main
 
-- name: Create general directories
-  file: path={{ project_dir }}/{{ item }} state=directory
+- name: "Create general directories"
+  file:
+    path: "{{ project_dir }}/{{ item }}"
+    state: directory
   with_items:
     - group_vars
     - host_vars
 
-- name: Create directory structure for roles
-  file: path={{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }} state=directory
+- name: "Create directory structure for roles"
+  file:
+    path: "{{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}"
+    state: directory
   with_nested:
     - roles
     - [ 'files', 'handlers', 'meta', 'tasks', 'templates', 'vars' ]
   tags:
     - roles
 
-- name: Create main.yml in directory structure for roles
-  template: src={{ item[1] }}.j2 dest={{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}/main.yml
+- name: "Create main.yml in directory structure for roles"
+  template:
+      src: "{{ item[1] }}.j2"
+      dest: "{{ project_dir }}/roles/{{ item[0] }}/{{ item[1] }}/main.yml"
   with_nested:
     - roles
     - [ 'handlers', 'tasks' ]
   tags:
     - roles
 
-- name: Create inventory files
-  template: src=inventory.j2 dest={{ project_dir }}/{{ item }}
+- name: "Create inventory files"
+  template:
+    src: inventory.j2
+    dest: "{{ project_dir }}/{{ item }}"
   with_items:
     - production
     - staging
   tags:
       - inventory
 
-- name: Create role playbooks
-  template: src=role.j2 dest={{ project_dir }}/{{ item }}.yml
+- name: "Create role playbooks"
+  template:
+    src: role.j2
+    dest: "{{ project_dir }}/{{ item }}.yml"
   with_items: roles
   tags:
     - roles
 
-- name: Create master playbook
-  template: src=master.j2 dest={{ project_dir }}/master.yml
+- name: "Create master playbook"
+  template:
+    src: master.j2
+    dest: "{{ project_dir }}/master.yml"
   tags:
     - master

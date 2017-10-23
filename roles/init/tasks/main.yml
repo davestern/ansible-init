@@ -64,3 +64,17 @@
     dest: "{{ project_dir }}/master.yml"
   tags:
     - master
+
+- name: "Register all directories"
+  find:
+    paths: "{{ project_dir }}"
+    file_type: directory
+    recurse: yes
+  register: project_dirs
+
+- name: "Add .gitkeep to all directories"
+  copy:
+    dest: "{{ item.path }}/.gitkeep"
+    content: ''
+  with_items:
+    - "{{ project_dirs.files }}"
